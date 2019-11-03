@@ -4,8 +4,9 @@ bin/
 
 #ignore code workspace file
 
-cw.code-workspace
+*.code-workspace
 CommitTest.txt
+
 
 # Compiled source #
 ###################
