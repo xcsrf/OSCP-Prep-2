@@ -1,0 +1,110 @@
+###Linux basic command refresher:
+COMPLETE
+#echo - display a line of text i.e
+
+    echo
+
+    #include text into file
+
+    echo foobar3 > sampleTextfile.txt
+
+    #inlcude text into next line 
+
+    echo foobar2 >> sampleTextfile.txt
+
+#if cat sampleTextfile.txt, it would look like this:
+
+    foobar3
+    foobar2
+
+####Kali Linux Services####
+
+###HTTP via Apache2###
+
+##enable service on startup##
+    
+    systemctl enable/disable Apache2
+
+##toggle service##
+
+    service apache2 stop/start
+
+#Note: HTTP files are stored at /var/www/html
+
+    ls -la /var/www/html #view all files in /var/www/html with -la flag
+
+###SSH via ssh###
+
+##enable ssh service on startup##
+
+    systemctl enable/stop ssh
+
+##toggle ssh service##
+
+    service ssh stop/start
+
+#configure SSH on Kali to allow login w root password (insecure)
+    In /etc/ssh/sshd_config
+    #replace
+    PermitRootLogin without-password
+    #by
+    PermitRootLogin yes
+
+#and restart your ssh daemon
+    
+    service ssh restart
+
+####Change Kali default ssh keys to avoid MITM attack:
+
+### 1 - Move the default Kali ssh keys to a new folder:
+
+    cd /etc/ssh/
+    mkdir default_keys
+    mv ssh_host_* default_keys/
+
+## 2- Regenerate the keys
+    /etc/ssh#  dpkg-reconfigure openssh-server    
+# 3- Verify Hashes are different
+
+    #New Keys
+    root@kali:~/Desktop#  md5sum /etc/ssh/ssh_host_*
+    7c356a37194b168c8998e4f4c6bc4822  /etc/ssh/ssh_host_ecdsa_key
+    40201d32f30af73ff0ddd8ff4a9253ad  /etc/ssh/ssh_host_ecdsa_key.pub
+    2e8ecc3f524c9eeff1d7e9e2535de719  /etc/ssh/ssh_host_ed25519_key
+    501f657cf43ed5805877015b5db17795  /etc/ssh/ssh_host_ed25519_key.pub
+    e565c9cfad06a77e6c503495488a89a3  /etc/ssh/ssh_host_rsa_key
+    5398c7caa497fbf9a6b393b9f3f26d61  /etc/ssh/ssh_host_rsa_key.pub
+    
+    #Old keys
+    root@kali:~/Desktop# md5sum /etc/ssh/default_keys/ssh_host_*
+    1c0708b3650588fee747ec260456e462  /etc/ssh/default_keys/ssh_host_ecdsa_key
+    80cbf54059209cf8aed6da84470fac34  /etc/ssh/default_keys/ssh_host_ecdsa_key.pub
+    74219100e3c61f837c1c58cdeae270c4  /etc/ssh/default_keys/ssh_host_ed25519_key
+    0a55504a51484b9cf2ed3c9977133292  /etc/ssh/default_keys/ssh_host_ed25519_key.pub
+    3f8b740c6889ef41353ba49cc9c42968  /etc/ssh/default_keys/ssh_host_rsa_key
+    cadb9034d2688a904cd24f73b9416423  /etc/ssh/default_keys/ssh_host_rsa_key.pub
+
+# 4- Restart SSH service 
+
+    systemctl restart ssh.service
+
+##### SET MOTD for extra badassness
+
+    sudo nano /etc/MOTD
+
+    #remove current MOTD
+
+    rm /etc/motd
+
+    #backup ssh config
+
+    cp /etc/ssh/sshd_config /etc/ssh/sshd_config_backup
+
+    #change port ssh listens on 
+
+    find '#Port 22' change 22 to desired TCP port. 
+
+    #Restart openssh
+
+    systemctl restart ssh
+
