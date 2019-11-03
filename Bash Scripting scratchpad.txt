@@ -8,7 +8,7 @@
 #flag yields a curated list of responding IP addresses which is 
 #what we want) of 4. But a range can be specified if 4-9 format is 
 #used; sed is used to remove characters from final output 's/.$//' 
-# ***Research pending on the syntax of "sed" linux command ***
+# ***Research pending on the syntax of "sed" linux command *** test
 
     ping -c 1 192.168.1.1 | grep "64 bytes from" | cut -d " " -f 4 | sed 's/.$//'
 
