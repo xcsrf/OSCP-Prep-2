@@ -1,0 +1,7 @@
+#NMAP - Port scanning, network discovery
+
+#nmap -vv for verbosity, -Pn treats hosts as UP; -A complete scan; s stealth scan, never establishes connection just sends a reset packet to prevent an IDS/Firewall from alarming though most ngfw WILL pick up on it; S Syn scan; -T for speed 1 slowest, more complete probably will find more ports 5 fastest, 4 should be okay in lab - 5 is not recommended; -p- all range of ports if you don't put - after -p it will scan only standard well known ports; -oA save all to xml file, -oN gives you nmap file; /path/to/file
+
+    nmap -vv -Pn -A -sS -T4 -p- -oA/N /winnie/Desktop/tcpscan.txt 192.168.2.2
+
+    

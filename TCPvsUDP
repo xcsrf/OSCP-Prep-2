@@ -1,0 +1,16 @@
+#Differences of TCP vs UDP
+
+
+    #TCP:
+    Connection-oriented
+    Reliable transmission - HTTP/FTP/SSH
+    How? - 3 way handshake
+
+    #UDP
+    Connectionless
+    Fast connection > reliability (DNS, DHCP, SNMP)
+    No handshake 
+    Hard to scan (false positives, false negative; machine not showing open UDP port but it might be open 
+    
+)
+
