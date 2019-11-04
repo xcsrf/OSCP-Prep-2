@@ -1,0 +1,53 @@
+#Information Gathering 11/3 (reference CEH course for list of tools)
+
+
+Main Tools: 
+
+    Google #1
+    Exploit-DB/Google Hacking DB #2
+    WHOIS
+    Netcraft
+    theharverster
+    Shodan
+
+
+
+#Google
+
+#To restrict websites to a specific Domain; on the google search bar type <site:xyz.com>. i.e oscp.com
+
+    site:oscp.com
+
+#To filter out a specific subdomain, in this case web do -site:www.oscp.com
+#why? try to find an ftp for example
+
+    site:oscp.com -site:www.oscp.com
+
+#Furthermore, to look for a specific filetype use <filetype:ext>. i.e pdf
+
+    site:oscp.com -site:www.oscp.com filetype:pdf 
+
+#On search settings, access Advanced search for extended filters (if unsure about syntax)
+#Search for Google Syntax (must)
+
+
+
+
+#Google Hacking Database - Exploit Database
+
+    example search to do on google under Files containing passwords: enable secret ext:cfg -git -cisco.com 
+
+#Shodan - Webcams, default passwords, web servers, 
+
+#Netcraft
+
+    add *.domain.com for subdomain wildcard
+
+###WHOIS
+
+    whois oscp.com
+
+##Theharvester - Searches for emails
+
+    theharvester -d #domain examplestore.com -b #searchengines google/all/bing
+
