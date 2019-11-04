@@ -52,3 +52,5 @@ fi
 ##for loop to do basic scan of the IPs in the list and save to text file
 
 for ip in $(cat iplist.txt); do nmap -Pn $ip; done > nmapresults.txt
+
+test
